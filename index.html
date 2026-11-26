@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07060a" />
+    <title>VESPER-1 — Seven minutes to the surface (fictional mission concept)</title>
+    <meta
+      name="description"
+      content="VESPER-1 is a fictional Mars lander concept. Ride the approach from deep-space cruise to touchdown. All telemetry is simulated."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main class="hero" id="hero" data-state="idle" data-phase="cruise">
+      <div class="scene" aria-hidden="true">
+        <div class="scene-fallback" id="fallback"><div class="fallback-planet"></div><div class="fallback-ground"></div></div>
+        <canvas id="scene"></canvas>
+        <div class="scrim"></div>
+      </div>
+      <p class="visually-hidden" id="scene-desc">
+        Animated view from a lander approaching Mars: the planet grows from a distant disc, glows during atmospheric
+        entry, and the camera tilts to the horizon as dust rises at touchdown.
+      </p>
+
+      <header class="nav">
+        <a class="wordmark" href="#hero" aria-label="VESPER-1 home">VESPER<span>·</span>1</a>
+        <nav aria-label="Primary">
+          <a href="#timeline">Approach</a>
+          <a href="#telemetry">Telemetry</a>
+        </nav>
+        <span class="tag">Fictional mission concept</span>
+      </header>
+
+      <section class="copy" aria-describedby="scene-desc">
+        <p class="eyebrow">Mars landing — Touchdown</p>
+        <h1>Seven minutes<br />to the surface.</h1>
+        <p class="lede">
+          Follow a fictional lander from deep-space cruise to touchdown on the Halden Plain, in one unbroken shot.
+        </p>
+        <div class="actions">
+          <button class="cta" id="cta" type="button">Begin approach</button>
+          <span class="static-note" id="static-note" hidden>Static view — live scene needs WebGPU</span>
+        </div>
+      </section>
+
+      <section class="dock" aria-label="Approach controls and simulated telemetry">
+        <div class="telemetry" id="telemetry" tabindex="-1">
+          <p class="telemetry-label">Simulated telemetry <span>· illustrative values, not real data</span></p>
+          <dl>
+            <div><dt>Altitude</dt><dd id="t-alt">—</dd></div>
+            <div><dt>Velocity</dt><dd id="t-vel">—</dd></div>
+            <div><dt>Phase</dt><dd id="t-phase">Cruise</dd></div>
+            <div><dt>Clock</dt><dd id="t-clock">T−07:00</dd></div>
+          </dl>
+        </div>
+
+        <div class="timeline" id="timeline" tabindex="-1">
+          <p class="caption" id="caption"></p>
+          <input
+            id="scrub"
+            type="range"
+            min="0"
+            max="1000"
+            value="0"
+            step="1"
+            aria-label="Approach timeline"
+            aria-valuetext="Cruise, 0 percent"
+          />
+          <div class="phases" role="group" aria-label="Jump to phase">
+            <button type="button" data-phase="cruise" aria-pressed="true">Cruise</button>
+            <button type="button" data-phase="entry" aria-pressed="false">Entry</button>
+            <button type="button" data-phase="descent" aria-pressed="false">Descent</button>
+            <button type="button" data-phase="touchdown" aria-pressed="false">Touchdown</button>
+          </div>
+        </div>
+        <p class="disclaimer">
+          VESPER-1 is a fictional concept made for a design exercise. Not affiliated with or endorsed by NASA.
+        </p>
+      </section>
+
+      <p class="visually-hidden" aria-live="polite" id="live"></p>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
